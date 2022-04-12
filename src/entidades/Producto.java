@@ -2,28 +2,28 @@ package entidades;
 
 public class Producto {
 
-	private int id;
-    private String name;
-    private String email;
+	private int idProducto;
+    private String nombre;
+    private Float valor;
     
-    public Producto (int idCliente, String name, String email) {
-    	this.id=idCliente;
-    	this.name=name;
-    	this.email=email;
+    public Producto (int idProducto, String nombre, Float valor) {
+    	this.idProducto=idProducto;
+    	this.nombre=nombre;
+    	this.valor=valor;
     }
     
-    public String getName() {
-		return name;
+    public String getNombre() {
+		return nombre;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNombre(String name) {
+		this.nombre = name;
 	}
 	
-	public String getEmail() {
-		return email;
+	public Float getValor() {
+		return valor;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setValor(Float valor) {
+		this.valor = valor;
 	}
 	
 }

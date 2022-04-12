@@ -3,34 +3,24 @@ package entidades;
 public class Factura {
 
 	private int idFactura;
-	private int idProducto;
-	private int cantidad;
-	
-	public Factura(int idFactura, int idProducto, int cantidad) {
+	private int idCliente;
+
+	public Factura(int idFactura, int idCliente) {
 		this.idFactura = idFactura;
-		this.idProducto = idProducto;
-		this.cantidad = cantidad;
+		this.idCliente = idCliente;
 	}
-	
 	public int getIdFactura() {
 		return idFactura;
 	}
 	public void setIdFactura(int idFactura) {
 		this.idFactura = idFactura;
 	}
-	public int getIdProducto() {
-		return idProducto;
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setIdProducto(int idProducto) {
-		this.idProducto = idProducto;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
-	public int getCantidad() {
-		return cantidad;
-	}
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-	
 	
 	
 	

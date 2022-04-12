@@ -6,7 +6,6 @@ import java.util.Optional;
 public class DaoClienteMySQL implements DaoCliente {
 	//Aca hay que hacer sentencias sql
 	
-	
 	@Override
 	public List getAll() {
 		// TODO Auto-generated method stub
