@@ -4,22 +4,33 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import dao.DaoCliente;
+import dao.DaoFactura;
+import dao.DaoFacturaProducto;
+import dao.DaoProducto;
+import esquema.EsquemaDerby;
+import factory.My_SQL_DAO_Factory;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import factory.Dao_Factory;
-import factory.Derby_Dao_Factory;
+import factory.Derby_DAO_Factory;
 
 public class Main {
 
 
-		public static void Main(String[] args) throws FileNotFoundException, IOException {
-			// TODO Auto-generated method stub
-			
-			Dao_Factory dao = new Derby_Dao_Factory();
-			
-			
+		public static void Main(String[] args) throws FileNotFoundException, IOException, SQLException {
+
+			Connection con = Dao_Factory.get_DAO_Factory(2);
+			EsquemaDerby d = new EsquemaDerby(con);
+
+			//paso 2: Insertar la info de los CSV
+
+
+
+
+
 		}
 		
 		
@@ -45,6 +56,10 @@ public class Main {
 				addFacturaProducto(conn,Integer.parseInt(row.get("idFactura")),Integer.parseInt(row.get("idProducto")),Integer.parseInt(row.get("cantidad")) );
 			}
 		}
+
+
+
+
 		
 		private static void addProduct(Connection conn, int id, String name, int value) throws SQLException {
 			// TODO Auto-generated method stub

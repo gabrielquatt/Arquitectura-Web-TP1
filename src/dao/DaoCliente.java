@@ -1,15 +1,13 @@
 package dao;
 
-import java.util.List;
-import java.util.Optional;
+import entidades.Cliente;
 
-public interface DaoCliente<T> {
+import java.sql.SQLException;
+import java.util.List;
+
+public interface DaoCliente<T> extends Dao<Cliente>{
      
-    List<T> getAll();
-    
-    void save(T t);//guardar en la db
-    
-    void update(T t, String[] params);//actualizar db
-    
-    void delete(T t); //eliminar de db
+    List<T> masFacturados() throws SQLException;
+
+
 }

@@ -11,8 +11,12 @@ public class Cliente {
     	this.name=name;
     	this.email=email;
     }
-    
-    public String getName() {
+
+	public int getId() {
+		return this.id;
+	}
+
+	public String getName() {
 		return name;
 	}
 	public void setName(String name) {

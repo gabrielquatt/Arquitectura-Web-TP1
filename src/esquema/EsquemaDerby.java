@@ -3,12 +3,13 @@ package esquema;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class Esquema {
+public class EsquemaDerby {
 
-	
-	
+	public EsquemaDerby(Connection con) throws SQLException {
+		createTables(con);
+	}
+
 	private void createTables(Connection conn) throws SQLException {
-		// TODO Auto-generated method stub
 		String table = "CREATE TABLE producto("
 				+ "idProducto INT,"
 				+ "nombre VARCHAR(500),"
@@ -16,6 +17,7 @@ public class Esquema {
 				+ "PRIMARY KEY(idProducto))";
 		conn.prepareStatement(table).execute();
 		conn.commit();
+
 		table = "CREATE TABLE cliente("
 				+ "idCliente INT,"
 				+ "nombre VARCHAR(500),"
@@ -23,6 +25,7 @@ public class Esquema {
 				+ "PRIMARY KEY(idCliente))";
 		conn.prepareStatement(table).execute();
 		conn.commit();
+
 		table = "CREATE TABLE factura("
 				+ "idFactura INT,"
 				+ "idCliente INT,"
@@ -30,6 +33,7 @@ public class Esquema {
 				+ "FOREIGN KEY(idCliente) REFERENCES cliente(idCliente))";
 		conn.prepareStatement(table).execute();
 		conn.commit();
+
 		table = "CREATE TABLE factura_producto("
 				+ "idFactura INT,"
 				+ "idProducto INT,"
@@ -39,7 +43,6 @@ public class Esquema {
 				+ "FOREIGN KEY(idProducto) REFERENCES producto(idProducto))";
 		conn.prepareStatement(table).execute();
 		conn.commit();
-		
 	}
 	
 }

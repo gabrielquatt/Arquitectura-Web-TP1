@@ -1,18 +1,16 @@
 package dao;
 
+import entidades.Cliente;
+import entidades.Producto;
+
 import java.util.List;
 import java.util.Optional;
 
-public interface DaoProducto<T> {
+public interface DaoProducto<T> extends Dao<Producto>{
 
-	
-	  Optional<T> get(long id);
+		List<T> getAll();
 	    
-	    List<T> getAll();
+	    void insertarProducto(T t);//guardar en la db
 	    
-	    void save(T t);//guardar en la db
-	    
-	    void update(T t, String[] params);//actualizar db
-	    
-	    void delete(T t); //eliminar de db
+
 }

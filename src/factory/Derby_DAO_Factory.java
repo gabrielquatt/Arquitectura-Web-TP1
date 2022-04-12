@@ -10,16 +10,13 @@ import dao.DaoFactura;
 import dao.DaoFacturaProducto;
 import dao.DaoProducto;
 
-public class Derby_Dao_Factory extends Dao_Factory {
+public class Derby_DAO_Factory implements Dao_Factory {
 	
-	private Connection conn;
+	private static Connection conn;
+	private static  Derby_DAO_Factory miConector;
 
-	public Derby_Dao_Factory() {
-		conn = this.getIntance();
-	}
 
-	
-	public Connection getIntance() {
+	public static Connection getIntance() {
 		
 		if (conn != null) {
 			return conn;
@@ -51,13 +48,12 @@ public class Derby_Dao_Factory extends Dao_Factory {
 
 	@Override
 	public DaoCliente getDaoCliente() {
-		// TODO Auto-generated method stub
-		return null;
+		return DaoCliente;
 	}
 
 
 	@Override
-	public DaoFactura getDaoFactura() {
+	public static DaoFactura getDaoFactura() {
 		// TODO Auto-generated method stub
 		return null;
 	}
