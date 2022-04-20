@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,15 +33,18 @@ public class DaoClienteMySQL implements DaoCliente {
 	 * ps.executeUpdate(); this.conn.commit(); ps.close(); } this.conn.close(); }
 	 */
 
-	@Override
-	public List masFacturados() throws SQLException {
-		return null;
-	}
+
 
 	@Override
 	public void addCliente(Connection con, int id, String nombre, String email) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public HashMap masFacturados(Connection c) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

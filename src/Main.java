@@ -36,6 +36,9 @@ public class Main {
 		String consulta = d.getDaoProducto().masVendido(con);
 		System.out.println(consulta);
 		
+		System.out.println();
+		System.out.println();
+		d.getDaoCliente().masFacturados(con);
 		
 	}
 	
