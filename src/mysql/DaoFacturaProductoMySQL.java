@@ -19,22 +19,23 @@ public class DaoFacturaProductoMySQL implements DaoFacturaProducto {
 
 	}
 
-/*	public void insertCSV(CSVParser parser) throws SQLException {
-		this.conn = My_SQL_DAO_Factory.createConnection();
-		for(CSVRecord row: parser) {
-			int id_factura = Integer.parseInt(row.get("idFactura"));
-			int id_producto = Integer.parseInt(row.get("idProducto"));
-			int cantidad = Integer.parseInt(row.get("cantidad"));
+	@Override
+	public void addFacturaProducto(Connection con, int idFactura, int idProducto, int cantidad) {
+		// TODO Auto-generated method stub
 
-			String insert = "INSERT INTO Factura_Producto (idFactura, idProducto, cantidad) VALUES (?, ?, ?)";
-			PreparedStatement ps = this.conn.prepareStatement(insert);
-			ps.setInt(1, id_factura);
-			ps.setInt(2, id_producto);
-			ps.setInt(3, cantidad);
-			ps.executeUpdate();
-			this.conn.commit();
-			ps.close();
-		}
-		this.conn.close();
-	}*/
+	}
+
+	/*
+	 * public void insertCSV(CSVParser parser) throws SQLException { this.conn =
+	 * My_SQL_DAO_Factory.createConnection(); for(CSVRecord row: parser) { int
+	 * id_factura = Integer.parseInt(row.get("idFactura")); int id_producto =
+	 * Integer.parseInt(row.get("idProducto")); int cantidad =
+	 * Integer.parseInt(row.get("cantidad"));
+	 * 
+	 * String insert =
+	 * "INSERT INTO Factura_Producto (idFactura, idProducto, cantidad) VALUES (?, ?, ?)"
+	 * ; PreparedStatement ps = this.conn.prepareStatement(insert); ps.setInt(1,
+	 * id_factura); ps.setInt(2, id_producto); ps.setInt(3, cantidad);
+	 * ps.executeUpdate(); this.conn.commit(); ps.close(); } this.conn.close(); }
+	 */
 }

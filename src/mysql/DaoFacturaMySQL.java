@@ -19,27 +19,23 @@ public class DaoFacturaMySQL implements DaoFactura {
 
 	}
 
-
-/*
 	@Override
-	public void insertCSV(CSVParser parser) throws SQLException {
-		this.conn = My_SQL_DAO_Factory.createConnection();
-		for(CSVRecord row: parser) {
-			int id_factura = Integer.parseInt(row.get("idFactura"));
-			int id_cliente = Integer.parseInt(row.get("idCliente"));
+	public void addFactura(Connection con, int idFactura, int idCliente) {
+		// TODO Auto-generated method stub
 
-			String insert = "INSERT INTO Factura (idFactura, idCliente_FK) VALUES (?, ?)";
-			PreparedStatement ps = this.conn.prepareStatement(insert);
-			ps.setInt(1, id_factura);
-			ps.setInt(2, id_cliente);
-			ps.executeUpdate();
-			this.conn.commit();
-			ps.close();
-		}
-		this.conn.close();
 	}
-*/
 
-
+	/*
+	 * @Override public void insertCSV(CSVParser parser) throws SQLException {
+	 * this.conn = My_SQL_DAO_Factory.createConnection(); for(CSVRecord row: parser)
+	 * { int id_factura = Integer.parseInt(row.get("idFactura")); int id_cliente =
+	 * Integer.parseInt(row.get("idCliente"));
+	 * 
+	 * String insert =
+	 * "INSERT INTO Factura (idFactura, idCliente_FK) VALUES (?, ?)";
+	 * PreparedStatement ps = this.conn.prepareStatement(insert); ps.setInt(1,
+	 * id_factura); ps.setInt(2, id_cliente); ps.executeUpdate();
+	 * this.conn.commit(); ps.close(); } this.conn.close(); }
+	 */
 
 }

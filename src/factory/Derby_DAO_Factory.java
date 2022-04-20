@@ -5,6 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import Derby.DaoClienteDerby;
+import Derby.DaoFacturaDerby;
+import Derby.DaoFacturaProductoDerby;
+import Derby.DaoProductoDerby;
 import dao.DaoCliente;
 import dao.DaoFactura;
 import dao.DaoFacturaProducto;
@@ -13,8 +17,8 @@ import dao.DaoProducto;
 public class Derby_DAO_Factory implements Dao_Factory {
 	
 	private static Connection conn;
-	private static  Derby_DAO_Factory miConector;
-
+	
+	private static  Derby_DAO_Factory miConector;// <== 
 
 	public static Connection getIntance() {
 		
@@ -45,31 +49,25 @@ public class Derby_DAO_Factory implements Dao_Factory {
 		}
 	}
 
-
 	@Override
 	public DaoCliente getDaoCliente() {
-		return DaoCliente;
+		return new DaoClienteDerby(); //DaoDerbyCliente
 	}
 
-
 	@Override
-	public static DaoFactura getDaoFactura() {
-		// TODO Auto-generated method stub
-		return null;
+	public DaoFactura getDaoFactura() throws SQLException {
+		return new DaoFacturaDerby();
 	}
 
 
 	@Override
 	public DaoProducto getDaoProducto() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DaoProductoDerby();
 	}
-
 
 	@Override
 	public DaoFacturaProducto getDaoFacturaProducto() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DaoFacturaProductoDerby();
 	}
 
 }

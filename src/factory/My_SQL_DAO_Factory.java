@@ -1,6 +1,10 @@
 package factory;
 
 import dao.*;
+import mysql.DaoClienteMySQL;
+import mysql.DaoFacturaMySQL;
+import mysql.DaoFacturaProductoMySQL;
+import mysql.DaoProductoMySQL;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -20,7 +24,7 @@ public class My_SQL_DAO_Factory implements Dao_Factory {
         return conn;
     }
 
-    private static void registerDriver() {
+    /*private static void registerDriver() {
         try {
             // Se crea una instancia del Driver utilizando mecanismo de reflexion
             Class.forName(DRIVER).getDeclaredConstructor().newInstance();
@@ -30,26 +34,23 @@ public class My_SQL_DAO_Factory implements Dao_Factory {
             e.printStackTrace();
             System.exit(1);
         }
-    }
+    }*/
 
-    @Override
     public DaoCliente getDaoCliente() throws SQLException {
-        return null;
+        return new DaoClienteMySQL();
     }
 
-    @Override
     public DaoFactura getDaoFactura() throws SQLException {
-        return null;
+        return new DaoFacturaMySQL();
     }
 
-    @Override
     public DaoProducto getDaoProducto() throws SQLException {
-        return null;
+        return new DaoProductoMySQL();
     }
 
-    @Override
     public DaoFacturaProducto getDaoFacturaProducto() throws SQLException {
-        return null;
+        return new DaoFacturaProductoMySQL();
     }
 
+	
 }

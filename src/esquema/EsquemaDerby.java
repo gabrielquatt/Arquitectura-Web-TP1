@@ -1,7 +1,14 @@
 package esquema;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 public class EsquemaDerby {
 
@@ -44,5 +51,6 @@ public class EsquemaDerby {
 		conn.prepareStatement(table).execute();
 		conn.commit();
 	}
+	
 	
 }

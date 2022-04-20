@@ -16,31 +16,31 @@ public class DaoClienteMySQL implements DaoCliente {
 
 	private Connection conn;
 
-	public DaoClienteMySQL() throws SQLException{
+	public DaoClienteMySQL() throws SQLException {
 	}
 
-/*
-	@Override
-	public void insertCSV(CSVParser parser) throws SQLException {
-		for(CSVRecord row: parser) {
-			int id_cliente = Integer.parseInt(row.get("idCliente"));
-			String nombre = row.get("nombre");
-			String email = row.get("email");
-
-			String insert = "INSERT INTO Cliente (idCliente, nombre, email) VALUES (?, ?, ?)";
-			PreparedStatement ps = this.conn.prepareStatement(insert);
-			ps.setInt(1, id_cliente);
-			ps.setString(2, nombre);
-			ps.setString(3, email);
-			ps.executeUpdate();
-			this.conn.commit();
-			ps.close();
-		}
-		this.conn.close();
-	}*/
+	/*
+	 * @Override public void insertCSV(CSVParser parser) throws SQLException {
+	 * for(CSVRecord row: parser) { int id_cliente =
+	 * Integer.parseInt(row.get("idCliente")); String nombre = row.get("nombre");
+	 * String email = row.get("email");
+	 * 
+	 * String insert =
+	 * "INSERT INTO Cliente (idCliente, nombre, email) VALUES (?, ?, ?)";
+	 * PreparedStatement ps = this.conn.prepareStatement(insert); ps.setInt(1,
+	 * id_cliente); ps.setString(2, nombre); ps.setString(3, email);
+	 * ps.executeUpdate(); this.conn.commit(); ps.close(); } this.conn.close(); }
+	 */
 
 	@Override
 	public List masFacturados() throws SQLException {
 		return null;
 	}
+
+	@Override
+	public void addCliente(Connection con, int id, String nombre, String email) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
