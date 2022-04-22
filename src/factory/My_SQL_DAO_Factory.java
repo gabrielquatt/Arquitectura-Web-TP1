@@ -19,10 +19,11 @@ public class My_SQL_DAO_Factory implements Dao_Factory {
     private static My_SQL_DAO_Factory miConector;
     private static Connection c;
 
-    private My_SQL_DAO_Factory() {
+    private My_SQL_DAO_Factory() throws SQLException {
+    	this.createDatabase();
     }
     
-	static Dao_Factory getFactory() {
+	static Dao_Factory getFactory() throws SQLException {
 		if(miConector == null) {
 			miConector = new My_SQL_DAO_Factory();
 		}
@@ -48,6 +49,15 @@ public class My_SQL_DAO_Factory implements Dao_Factory {
 
 	}
 
+	private void createDatabase() throws SQLException {
+        // SQL command to create a database in MySQL.		
+        String sql = "CREATE DATABASE IF NOT EXISTS jdb_entregable";
+        String url = "jdbc:mysql://localhost:3308/";
+        c = DriverManager.getConnection(url, "root", "");
+        c.setAutoCommit(false);
+        c.prepareStatement(sql).execute();
+        c.commit();
+	}
 	
 	public void createTable() throws SQLException {
 		c = getIntance();
