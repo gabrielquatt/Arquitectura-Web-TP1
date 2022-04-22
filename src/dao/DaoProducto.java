@@ -10,13 +10,13 @@ import java.util.Optional;
 
 public interface DaoProducto<T> extends Dao<Producto>{
 
-		void getAll(Connection c) throws SQLException;
+		void getAll() throws SQLException;
 	    
-	    void addProduct(Connection c, int id, String name, int value) throws SQLException;//guardar en la db	  
+	    void addProduct( int id, String name, int value) throws SQLException;//guardar en la db	  
 
 		void eliminarProducto();
 
 		void editarProducto();
 		
-		String masVendido(Connection c) throws SQLException;
+		String masVendido() throws SQLException;
 }

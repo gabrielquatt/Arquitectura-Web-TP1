@@ -9,59 +9,26 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import Derby.DaoClienteDerby;
-import esquema.EsquemaDerby;
+import esquema.Esquema;
 import factory.Dao_Factory;
 import factory.Derby_DAO_Factory;
 
 public class Main {
 
 	// 1= MySql     2=Derby
-	private static int numConection = 2;
+	private static int numConection = 1;
 	
-	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		
+	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {	
 		Dao_Factory d = Dao_Factory.get_Factory(numConection);
-		Connection con = Dao_Factory.get_Conecction(numConection);
-		
-		//Paso 1: Crear Esquema
-		//EsquemaDerby derby = new EsquemaDerby(con);
-		//TODO EsquemaMySql = new EsquemaMySql(con)
-		
-		//Paso 2: Insertar la info de los CSV
-		//insertsTables(con,d);
-		
-		//Consulta 1:
-		//d.getDaoProducto().getAll(con);
-		String consulta = d.getDaoProducto().masVendido(con);
+	
+		//Esquema e = new Esquema(d);
+	
+		String consulta = d.getDaoProducto().masVendido();
 		System.out.println(consulta);
 		
 		System.out.println();
 		System.out.println();
-		d.getDaoCliente().masFacturados(con);
-		
+		d.getDaoCliente().masFacturados();	
 	}
 	
-
-	private static void insertsTables(Connection conn, Dao_Factory d) throws FileNotFoundException, IOException, SQLException {
-		CSVParser parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/productos.csv"));
-		for (CSVRecord row: parser) {
-			d.getDaoProducto().addProduct(conn,Integer.parseInt(row.get("idProducto")),row.get("nombre"),Integer.parseInt(row.get("valor")));
-		}
-		parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/clientes.csv"));
-		for (CSVRecord row: parser) {
-			d.getDaoCliente().addCliente(conn,Integer.parseInt(row.get("idCliente")),row.get("nombre"),row.get("email"));
-		}
-		
-		parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/facturas.csv"));
-		for (CSVRecord row: parser) {
-			d.getDaoFactura().addFactura(conn,Integer.parseInt(row.get("idFactura")),Integer.parseInt(row.get("idCliente")));
-		}
-		
-		parser = CSVFormat.DEFAULT.withHeader().parse(new FileReader("data/facturas-productos.csv"));
-		for (CSVRecord row: parser) {
-			d.getDaoFacturaProducto().addFacturaProducto(conn,Integer.parseInt(row.get("idFactura")),Integer.parseInt(row.get("idProducto")),Integer.parseInt(row.get("cantidad")));
-		}
-	}
-
 }

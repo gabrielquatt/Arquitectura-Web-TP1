@@ -2,6 +2,7 @@ package mysql;
 
 import dao.DaoCliente;
 import dao.DaoFactura;
+import factory.Dao_Factory;
 import factory.My_SQL_DAO_Factory;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -13,29 +14,20 @@ import java.util.List;
 
 public class DaoFacturaMySQL implements DaoFactura {
 
-	private Connection conn;
-
 	public DaoFacturaMySQL() throws SQLException{
 
 	}
 
 	@Override
-	public void addFactura(Connection con, int idFactura, int idCliente) {
-		// TODO Auto-generated method stub
-
+	public void addFactura( int idFactura, int idCliente_FK) throws SQLException {
+		Connection c = Dao_Factory.get_Factory(Dao_Factory.MYSQL_JDBC).getIntance();
+		String insert = "INSERT INTO Factura (idFactura, idCliente_FK) VALUES (?, ?)";
+		PreparedStatement ps = c.prepareStatement(insert);
+		ps.setInt(1, idFactura);
+		ps.setInt(2, idCliente_FK);
+		ps.executeUpdate();
+		ps.close();
+		c.commit();
+		//c.close();
 	}
-
-	/*
-	 * @Override public void insertCSV(CSVParser parser) throws SQLException {
-	 * this.conn = My_SQL_DAO_Factory.createConnection(); for(CSVRecord row: parser)
-	 * { int id_factura = Integer.parseInt(row.get("idFactura")); int id_cliente =
-	 * Integer.parseInt(row.get("idCliente"));
-	 * 
-	 * String insert =
-	 * "INSERT INTO Factura (idFactura, idCliente_FK) VALUES (?, ?)";
-	 * PreparedStatement ps = this.conn.prepareStatement(insert); ps.setInt(1,
-	 * id_factura); ps.setInt(2, id_cliente); ps.executeUpdate();
-	 * this.conn.commit(); ps.close(); } this.conn.close(); }
-	 */
-
 }

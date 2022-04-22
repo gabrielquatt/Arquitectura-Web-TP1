@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Wed Apr 20 20:15:10 ART 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-4942-17c0-00000f71e340 
+Fri Apr 22 18:23:50 ART 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-5328-e2ad-00000eb19f78 
 on database directory E:\TUDAI\Arquitectura web\Workspace\JDBC_Integrador\myDerbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@6d5380c2 
 Loaded from file:/C:/Users/gabri/.m2/repository/org/apache/derby/derby/10.15.2.0/derby-10.15.2.0.jar
 java.vendor=Oracle Corporation

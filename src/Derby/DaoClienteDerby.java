@@ -1,6 +1,9 @@
 package Derby;
 
 import dao.DaoCliente;
+import factory.Dao_Factory;
+import factory.Derby_DAO_Factory;
+
 import org.apache.commons.csv.CSVParser;
 import org.apache.derby.tools.sysinfo;
 
@@ -16,7 +19,8 @@ public class DaoClienteDerby implements DaoCliente {
 
  
 	@Override
-	public void addCliente(Connection c, int id, String name, String email) throws SQLException {
+	public void addCliente(int id, String name, String email) throws SQLException {
+		Connection c = Dao_Factory.get_Factory(Dao_Factory.DERBY_JDBC).getIntance();
 		String insert = "INSERT INTO cliente (idCliente, nombre, email) VALUES (?, ?, ?)";
 		java.sql.PreparedStatement ps = c.prepareStatement(insert);
 		ps.setInt(1, id);
@@ -25,10 +29,12 @@ public class DaoClienteDerby implements DaoCliente {
 		ps.executeUpdate();
 		ps.close();
 		c.commit();	
+		//c.close();
 	}
 
 	@Override
-	public LinkedHashMap<String, Integer> masFacturados(Connection c) throws SQLException {
+	public LinkedHashMap<String, Integer> masFacturados() throws SQLException {
+		Connection c = Dao_Factory.get_Factory(Dao_Factory.DERBY_JDBC).getIntance();
 		LinkedHashMap<String, Integer> r = new LinkedHashMap<>();
 		String consulta = "SELECT C.NOMBRE, SUM(CANTIDAD*VALOR) AS SUMA FROM CLIENTE C "
 			    +"JOIN FACTURA F on F.IDCLIENTE = C.IDCLIENTE "
@@ -40,10 +46,10 @@ public class DaoClienteDerby implements DaoCliente {
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {
-			 //System.out.println( rs.getString(1)+"  "+rs.getInt(2));
 			 r.put(rs.getString(1),rs.getInt(2));
 		}
 		imprimirHashMap(r);
+		//c.close();
 		return r;
 	}
 
@@ -52,8 +58,4 @@ public class DaoClienteDerby implements DaoCliente {
 			  System.out.println(i + "     " + r.get(i));
 			}
 	}
-
-
-
-	
 }

@@ -13,16 +13,86 @@ import java.sql.SQLException;
 
 public class My_SQL_DAO_Factory implements Dao_Factory {
 
-
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URI = "jdbc:mysql://localhost:3306/entregable_n1_arquitecturas";
-    private static Connection conn;
+    
+    private static final String URI = "jdbc:mysql://localhost:3306/jdb_entregable";
+    private static My_SQL_DAO_Factory miConector;
+    private static Connection c;
 
-    public static Connection createConnection() throws SQLException {
-        conn = DriverManager.getConnection(URI, "root", "");
-        conn.setAutoCommit(false);
-        return conn;
+    private My_SQL_DAO_Factory() {
     }
+    
+	static Dao_Factory getFactory() {
+		if(miConector == null) {
+			miConector = new My_SQL_DAO_Factory();
+		}
+		return miConector;
+	}
+
+    public Connection getIntance() throws SQLException  {
+    	if(c != null) {
+    		return c;
+    	}else {
+    		
+    		try {
+    			Class.forName(DRIVER).getDeclaredConstructor().newInstance();
+    		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+    				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+    			e.printStackTrace();
+    			System.exit(1);
+    		}
+    		c = DriverManager.getConnection(URI, "root", "");
+    		c.setAutoCommit(false);
+    		return c;    		
+    	}
+
+	}
+
+	
+	public void createTable() throws SQLException {
+		c = getIntance();
+		
+		String tablaProducto = "CREATE TABLE IF NOT EXISTS Producto("
+				+ "idProducto INT,"
+				+ "nombre VARCHAR(45),"
+				+ "valor FLOAT,"
+				+ "PRIMARY KEY(idProducto))";
+
+		c.prepareStatement(tablaProducto).execute();
+		c.commit();
+
+		String tablaCliente = "CREATE TABLE IF NOT EXISTS Cliente("
+				+ "idCliente INT,"
+				+ "nombre VARCHAR(500),"
+				+ "email VARCHAR(150),"
+				+ "PRIMARY KEY(idCliente))";
+		c.prepareStatement(tablaCliente).execute();
+		c.commit();
+		
+		
+		String tablaFactura = "CREATE TABLE IF NOT EXISTS Factura("
+				+ "idFactura INT,"
+				+ "idCliente_FK INT,"
+				+ "PRIMARY KEY(idFactura),"
+				+ "FOREIGN KEY(idCliente_FK) references Cliente(idCliente))";
+
+		c.prepareStatement(tablaFactura).execute();
+		c.commit();
+		
+		String tablaFactura_Producto = "CREATE TABLE IF NOT EXISTS Factura_Producto("
+				+ "idFactura INT,"
+				+ "idProducto INT,"
+				+ "cantidad INT,"
+				+ "PRIMARY KEY(idFactura, idProducto),"
+				+ "FOREIGN KEY(idFactura) references Factura(idFactura),"
+				+ "FOREIGN KEY(idProducto) references Producto(idProducto))";
+
+		c.prepareStatement(tablaFactura_Producto).execute();
+		c.commit();
+		//c.close();
+	}
+
+	
 
     /*private static void registerDriver() {
         try {

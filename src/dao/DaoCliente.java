@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DaoCliente<T> extends Dao<Cliente>{
      
-    void addCliente(Connection con,int id, String nombre, String email ) throws SQLException;
+    void addCliente(int id, String nombre, String email ) throws SQLException;
 
-    HashMap<String, Integer> masFacturados(Connection c) throws SQLException;
+    HashMap<String, Integer> masFacturados() throws SQLException;
 }

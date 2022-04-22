@@ -1,6 +1,7 @@
 package Derby;
 
 import dao.DaoProducto;
+import factory.Dao_Factory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,8 @@ import java.util.List;
 public class DaoProductoDerby implements DaoProducto {
 
 	@Override
-	public void getAll(Connection c) throws SQLException {
+	public void getAll() throws SQLException {
+		Connection c = Dao_Factory.get_Factory(Dao_Factory.DERBY_JDBC).getIntance();
 		String select = "SELECT * FROM producto";
 		PreparedStatement ps = c.prepareStatement(select);
 		ResultSet rs = ps.executeQuery();
@@ -19,7 +21,7 @@ public class DaoProductoDerby implements DaoProducto {
 		while (rs.next()) {
 			System.out.println(rs.getInt(1) + ", " + rs.getString(2) + ", " + rs.getInt(3));
 		}
-		c.close();
+		//c.close();
 	}
 
 	@Override
@@ -33,7 +35,8 @@ public class DaoProductoDerby implements DaoProducto {
 	}
 
 	@Override
-	public void addProduct(Connection c, int id, String name, int value) throws SQLException {
+	public void addProduct(int id, String name, int value) throws SQLException {
+		Connection c = Dao_Factory.get_Factory(Dao_Factory.DERBY_JDBC).getIntance();
 		String insert = "INSERT INTO producto (idProducto, nombre, valor) VALUES (?, ?, ?)";
 		java.sql.PreparedStatement ps = c.prepareStatement(insert);
 		ps.setInt(1, id);
@@ -42,10 +45,12 @@ public class DaoProductoDerby implements DaoProducto {
 		ps.executeUpdate();
 		ps.close();
 		c.commit();
+		//c.close();
 	}
 
 	@Override
-	public String masVendido(Connection c) throws SQLException {
+	public String masVendido() throws SQLException {
+		Connection c = Dao_Factory.get_Factory(Dao_Factory.DERBY_JDBC).getIntance();
 		String consulta = "SELECT FP.idProducto, P.nombre "
 				+ "FROM factura_producto FP JOIN producto P ON FP.idProducto = P.idProducto "
 				+ "GROUP BY FP.idProducto, P.nombre, P.valor " + "ORDER BY SUM(cantidad) * P.valor DESC "
@@ -58,6 +63,7 @@ public class DaoProductoDerby implements DaoProducto {
 		while (rs.next()) {
 			product = rs.getInt(1) + ", " + rs.getString(2);
 		}
+		//c.close();
 		return product;
 	}
 }

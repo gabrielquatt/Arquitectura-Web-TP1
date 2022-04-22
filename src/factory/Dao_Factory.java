@@ -19,33 +19,41 @@ public interface Dao_Factory {
 	public abstract DaoFactura getDaoFactura() throws SQLException;
 	public abstract DaoProducto getDaoProducto() throws SQLException;
 	public abstract DaoFacturaProducto getDaoFacturaProducto() throws SQLException;
-
-	// Crea un factory especifico segun la tecnologia que se elija.
-	public static Connection get_Conecction(int whichFactory) {
-		switch (whichFactory) {
-		case MYSQL_JDBC:
-			return getIntanceMySql();
-		case DERBY_JDBC:
-			return getIntanceDerby();
-		default:
-			return null;
-		}
-	};
+	public abstract void createTable() throws SQLException;
+	public abstract Connection getIntance() throws SQLException;
+	
+	
+//	// Crea un factory especifico segun la tecnologia que se elija.
+//	public static Connection get_Conecction(int whichFactory) throws SQLException {
+//		switch (whichFactory) {
+//		case MYSQL_JDBC:
+//			return getIntanceMySql();
+//		case DERBY_JDBC:
+//			return getIntanceDerby();
+//		default:
+//			return null;
+//		}
+//	};
 
 	public static Dao_Factory get_Factory(int factory) {
 		switch (factory) {
-		case MYSQL_JDBC : return new My_SQL_DAO_Factory();
-		case DERBY_JDBC : return new Derby_DAO_Factory();
-		default: return null;
-	}
+		case MYSQL_JDBC:
+			return My_SQL_DAO_Factory.getFactory();
+		case DERBY_JDBC:
+			return Derby_DAO_Factory.getFactory();
+		default:
+			return null;
+		}
 	}
 
-	private static  Connection getIntanceMySql(){
-		return Derby_DAO_Factory.getIntance();
-	}
-
-	private static Connection getIntanceDerby(){
-		return Derby_DAO_Factory.getIntance();
-	}
+	
+	
+//	private static Connection getIntanceMySql() throws SQLException {
+//		return My_SQL_DAO_Factory.getIntance();
+//	}
+//
+//	private static Connection getIntanceDerby() throws SQLException{
+//		return Derby_DAO_Factory.getIntance();
+//	}
 
 }
