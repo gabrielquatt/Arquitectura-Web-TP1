@@ -35,7 +35,7 @@ public interface Dao_Factory {
 //		}
 //	};
 
-	public static Dao_Factory get_Factory(int factory) {
+	public static Dao_Factory get_Factory(int factory) throws SQLException {
 		switch (factory) {
 		case MYSQL_JDBC:
 			return My_SQL_DAO_Factory.getFactory();
